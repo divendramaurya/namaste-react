@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <title>Namaste React</title>
+</head>
+
+<body>
+    <h1>Hello from top of root</h1>
+    <div id="root">
+      <h1>Hello World..</h1>                            
+    </div>
+    <h1>Hello from bottom of root</h1>
+
+
+
+    <!-- <script>
+   const heading = document.createElement('h1');         // using JS
+   heading.innerHTML = 'Hello World from js';
+
+   const root = document.getElementById('root'); 
+   root.appendChild(heading);
+    </script> -->
+
+    <!-- By just injecting the below 2 files we have injected the superpowers the React, ReactDOM is giving to us. -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- this is the core file of the React algorithm.. It is core React file -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- this is used to do dom operations, to modify the dom -->
+    <!-- React works on mobiles (React Native, React 3D) also along with on browsers. There are different types of places where 
+    react is used. So there are different type of functions, methods being used in react native or browsers or different 
+    places. The React Dom file is kind of bridge between the  platform (mobile , browsers) and React -->
+    <script src="./App.js"> </script>
+</body>
+
+
+</html>
