@@ -1,0 +1,32 @@
+{
+  "name": "namaste_react",
+  "version": "1.0.0",
+  "description": "This is Namaste React",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/divendramaurya/namaste-react.git"
+  },
+  "keywords": [
+    "react",
+    "namaste-react"
+  ],
+  "author": "Divendranath Maurya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/divendramaurya/namaste-react/issues"
+  },
+  "homepage": "https://github.com/divendramaurya/namaste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist" : [
+    "Last 2 versions"
+  ]
+}
