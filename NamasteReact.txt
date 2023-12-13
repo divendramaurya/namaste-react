@@ -218,7 +218,7 @@ we use className in jsx and not class.
 The above look with look like this in browser.
 <h1 id="root" class="root" tabindex="1">normal h1 jsx tag</h1>
 ____________________________
-//React Element
+//React Element   // are written in lowercase.
 When we write multi like jsx we need to wrap jsx inside parenthesis ()
 eg : const jsxHeading = (<h1 id='root' 
                             className='root' 
@@ -229,6 +229,13 @@ eg : const jsxHeading = (<h1 id='root'
 
 For single line jsx, no need to wrap inside ()
 _____________________________________________________________________________________________________________
+--In React, 
+An element => is the smallest building block 
+while the component =>  is a reusable piece of the code.
+The element contains the information to be rendered on the UI 
+and the Components are composed of the elements.
+
+
 -- React Components 
    Everything in React is a components.
      We can create components in 2 ways in React.
@@ -272,4 +279,38 @@ in React
         <h1 className='heading'>This is a functional component</h1>  
       )
 
+      const HeadingComponent4 = () => (
+          <div id='container'>
+            <h1 className='heading'> i am react h1 tag</h1>
+          </div>
+      )
+
+      const HeadingComponent4 = () => (
+        <div id='container'>
+          <HeadingComponent/>      // component inside component is called component composition. Composing 2 components in one another.
+        <h1 className='heading'> i am react HeadingComponent4 tag</h1>
+       </div>
+      )
+
+      const HeadingComp = function(){
+         return ( <h1 className='HeadingComp'>i am HeadingComp</h1>);
+      }
+
+
+      let num = 100;
+      const jsxHeading = <h1 id='root' className='rootClass' tabIndex = '1'>normal h1 jsx tag</h1>;
+
+      const HeadingComponent4 = () => (
+        <div id='container'>
+          <h2>{num}</h2>
+          <h2>{jsxHeading}</h2>
+          <HeadingComp/>                    // Can write like this<HeadingComp/> or <HeadingComp></HeadingComp>  or  {HeadingComp()}
+          <HeadingComp></HeadingComp>
+          {HeadingComp()}
+        <h1 className='heading'> i am react HeadingComponent4 tag</h1>
+       </div>
+   )  // we can write js/react element in react component inside {} and vice versa.
+
+
 _____________________________________________________________________________________________________________
+-- React prevents cross-site scripting by sanitizing the data that is coming inside {} and then will execute/pass it.
