@@ -1,3 +1,4 @@
+/*
 git url::
 https://github.com/divendramaurya/namaste-react
 
@@ -164,19 +165,20 @@ __________________________
 https://babeljs.io/
 Babel is a JavaScript compiler.(Transpilers) node library/ npm package.
 input => const hello = <h1>hellow</h1>
-output=> /*#__PURE__*/React.createElement("h1", {}, 'hellow');
+output=> React.createElement("h1", {}, 'hellow');
 __________________________
 ----Polyfilling
 It Provides an equivalent piece of code to give modern functionality on older browsers that do not natively support it.
 For example, consider the following utility: Number.isNaN.
 
 ES6 defines this utility to provide a better check than the original for NaN values. Still, if your browser does not support it (rare nowadays), you can easily create a polyfill for this utility and start using it regardless of whether your browser supports it or not.
-
+*/
 if (!Number.isNan){
 Number.isNaN = function isNaN(n){
    return n!== n; 
   }
-}
+};
+/*
 The if (!Number.isNan) check guards against applying the polyfill in browsers that support natively it.
 
 The problem with polyfills is that not all features are polyfillable, and you should be very careful implementing them because if your polyfill does not adhere precisely to the specification, all of your code that uses your polyfill will be incorrect.
@@ -217,18 +219,27 @@ const jsxHeading = <h1 id='root' className='root' tabIndex = '1'>normal h1 jsx t
 we use className in jsx and not class.
 The above look with look like this in browser.
 <h1 id="root" class="root" tabindex="1">normal h1 jsx tag</h1>
+*/
 ____________________________
-//React Element
-When we write multi like jsx we need to wrap jsx inside parenthesis ()
+//React Element   // are written in lowercase.
+//When we write multi like jsx we need to wrap jsx inside parenthesis ()
 eg : const jsxHeading = (<h1 id='root' 
                             className='root' 
                             tabIndex = '1'>
                             normal h1 jsx tag
                         </h1>);
-() is needed by babel to understand where the jsx syntax starts and where it ends.
+//() is needed by babel to understand where the jsx syntax starts and where it ends.
 
-For single line jsx, no need to wrap inside ()
+//For single line jsx, no need to wrap inside ()
 _____________________________________________________________________________________________________________
+/*
+--In React, 
+An element => is the smallest building block 
+while the component =>  is a reusable piece of the code.
+The element contains the information to be rendered on the UI 
+and the Components are composed of the elements.
+
+
 -- React Components 
    Everything in React is a components.
      We can create components in 2 ways in React.
@@ -238,11 +249,12 @@ ________________________________________________________________________________
 Functional components is normal js function which returns a piece of JSX code (JSX /React element or bunch of elements).
 
 Any React components should be start with capital letter or will get an error.
-eg:        function App() { ....
+eg:   
+*/     function App() { //...
           } 
-          const Myfucntion = () => { ...
+          const Myfucntion = () => { //...
           }
-           class Helloworld {....
+           class Helloworld { //...
           }   
 
 ____________________________
@@ -251,17 +263,17 @@ in JS
           return "xyz"
         }
 
-        is same as
+        //is same as
 
         const func2 = () => "xyz"  // shorthand syntax
 
-        is same as 
+        //is same as 
 
         function func3() {
           return "xyz"
         }
------------
-in React
+//-----------
+//in React
       const HeadingComponent = () => {
         return <h1 className='heading'>This is a functional component</h1>
       }
@@ -272,4 +284,38 @@ in React
         <h1 className='heading'>This is a functional component</h1>  
       )
 
+      const HeadingComponent4 = () => (
+          <div id='container'>
+            <h1 className='heading'> i am react h1 tag</h1>
+          </div>
+      )
+
+      const HeadingComponent4 = () => (
+        <div id='container'>
+          <HeadingComponent/>      // component inside component is called component composition. Composing 2 components in one another.
+        <h1 className='heading'> i am react HeadingComponent4 tag</h1>
+       </div>
+      )
+
+      const HeadingComp = function(){
+         return ( <h1 className='HeadingComp'>i am HeadingComp</h1>);
+      }
+
+
+      let num = 100;
+      const jsxHeading = <h1 id='root' className='rootClass' tabIndex = '1'>normal h1 jsx tag</h1>;
+
+      const HeadingComponent4 = () => (
+        <div id='container'>
+          <h2>{num}</h2>
+          <h2>{jsxHeading}</h2>
+          <HeadingComp/>                    // Can write like this<HeadingComp/> or <HeadingComp></HeadingComp>  or  {HeadingComp()}
+          <HeadingComp></HeadingComp>
+          {HeadingComp()}
+        <h1 className='heading'> i am react HeadingComponent4 tag</h1>
+       </div>
+   )  // we can write js/react element in react component inside {} and vice versa.
+
+
 _____________________________________________________________________________________________________________
+//-- React prevents cross-site scripting by sanitizing the data that is coming inside {} and then will execute/pass it.

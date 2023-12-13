@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "This is Namaste React",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -20,13 +22,14 @@
   },
   "homepage": "https://github.com/divendramaurya/namaste-react#readme",
   "devDependencies": {
-    "parcel": "^2.10.3"
+    "parcel": "^2.10.3",
+    "process": "^0.11.10"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-  "browserslist" : [
+  "browserslist": [
     "Last 2 versions"
   ]
 }
