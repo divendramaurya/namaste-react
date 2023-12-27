@@ -319,3 +319,135 @@ in JS
 
 _____________________________________________________________________________________________________________
 //-- React prevents cross-site scripting by sanitizing the data that is coming inside {} and then will execute/pass it.
+
+_____________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________
+
+/**   Layout of food Delievery App
+ *  Header
+ *    Logo
+ *    Navigation Items
+ *  Body
+ *   Search bar
+ *   RestaurantContainer
+ *      Restaurant cards
+ *  Footer
+ *    Contact
+ *    Address
+ *    Copyright
+ *    Links
+ * 
+ * 
+*/
+
+// when we write inline css then css should be provided as object inside {}  // Its not the preferred way to write code.
+
+const styleCard = {
+  backgroundColor: "#f0f0f0"
+}
+
+const RestaurantCard = () => {
+  return (
+      <div className="res-card" style = {styleCard}>
+          <div className="xyz" style = {{backgroundColor: pink}}>   /**can give css object inside {}*/ 
+              <h3>Meghna foods</h3>
+          </div>
+      </div>
+  )
+}
+
+//Padding is used to create space within an element, while margin is used to create space between elements.
+
+// Passing a props to a component in React is like passing an argument to js function.
+// When we have to dynamically pass some data to a compoenent we pass it as a props. All the properties we need to provide is wrapped in a object and passed as props to the component. Props is a object.
+
+
+//System Design Question// Config Driven UI -> swiggy , zomata have  --> 
+//controlling the ui using the config data -> this config data comes form backend.
+// UI layer and Data layer both together builds up a frontend application.
+
+
+Array.join()
+
+const elements = ['Fire', 'Air', 'Water'];
+
+console.log(elements.join());
+// Expected output: "Fire,Air,Water"
+
+console.log(elements.join(''));
+// Expected output: "FireAirWater"
+
+console.log(elements.join('-'));
+// Expected output: "Fire-Air-Water"
+
+console.log(elements.join(', '));
+// Expected output: "Fire, Air, Water"
+
+//-----------------------------------------------------------------------------------------
+// Always give key attribute when looping through map . It helps react to identify the childs uniquely.
+
+// Never use index as a key. Index as a key is anti-pattern. Use index as a key as a last resort. Use index as key only when unique key is not present.
+
+// not using key(not acceptable) <<<<<<< index as as key  <<<<<< unique key
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//- 2 types of exports:
+
+//-Default import/export:
+  export default Component;
+  import Component from 'path';
+
+//Named import/export:
+// When one have to export multiple things then use named export;
+  export const Component;
+  import { Component } from 'path';
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//Whenever a state variable updates React Re- renders the Component.
+
+// React Hooks:
+//It is a normal js utility function.
+// useState gives  us powerful sgtate variables.
+// React keeps our UI in sync with the data layer(local state variable).
+// As soon as the data layer updates the UI layer updates. By re-rendering the component.
+// React makes DOM operations superfast and efficient.
+
+// React is fast because it does efficient DOM manipulation. Because it uses a virtual DOM.
+
+// Reconciliation Algorithm (React Fiber) => came in React 16.0
+// Algorithm to update the DOM.
+// https://github.com/acdlite/react-fiber-architecture
+
+// Virtual Dom is a kind of Object representation of the Actual DOM. Its a normal js Object.
+// The javascript Object representation of the HTML code/tags is called as virtual DOM.
+// Virtual DOM has existed way long back in software Engg. React took that and build its code over that virtual DOM. So virtual DOM got popular after React used it.
+// Eg: console.log(<Body/>);
+// As soon we call the Eg :setListOfRestaurants(filteredList); React will find out the diff and update the UI by re-rendering the component.
+  const [listOfRestaurants,setListOfRestaurants ] = useState(resList);
+// whever you call the second function "setListOfRestaurants(res)", React will automatically re-render your component.
+
+// All the UI we seen on screen, React keeps a track of HTML tags/Dom nodes, in the form of virtual DOM (kind of object virtual represenation of the whole real DOM).
+// So react basically finds out the difference between the new object and the old object. React doesn't touch the HTML a lot.
+ 
+// Diff Algorithm
+// Finds out the difference between 2 virtual DOMS  => updated virtual dom and previous virtual dom.
+// Its like a "git diff" between new object and old object, once it finds out the difference between this  objects, then it will update the actual real DOM. Making React faster.
+// Finding out the difference between 2 HTML codes is tough , while finding out the difference between 2 js Objects is fast.
+
+//Incremental rendering: the ability to split rendering work into chunks and spread it out over multiple frames.
+
+
+//useState gives use a array. 
+//array[0] gives a variable and array[1] gives us a set function to update that variable.
+const [listOfRestaurants,setListOfRestaurants ] = useState(resList);  // destructured on the fly.
+  //OR
+
+const arr =  useState(resList);
+const [listOfRestaurants,setListOfRestaurants ] = arr;
+  //OR
+
+const arr =  useState(resList);
+const listOfRestaurants = arr[0];
+const setListOfRestaurants = arr[1];

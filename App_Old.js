@@ -1,6 +1,24 @@
 import React from "react";
 import ReactDOM from 'react-dom/client';
 
+/**   Layout of food Delievery App
+ *  Header
+ *    Logo
+ *    Navigation Items
+ *  Body
+ *   Search bar
+ *   RestuarantContainer
+ *      Restuarant cards
+ *  Footer
+ *    Contact
+ *    Address
+ *    Copyright
+ *    Links
+ * 
+ * 
+*/
+
+
 {/* 
 <div id='parent'>
   <div id='child'>
