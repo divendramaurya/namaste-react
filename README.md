@@ -18,12 +18,12 @@
  *    Links
 */
 
-- 2 types of exports:
+# 2 types of exports:
 
 -Default import/export:
   export default Component;
   import Component from 'path';
 
-Named import/export:
+-Named import/export:
   export const Component;
   import { Component } from 'path';

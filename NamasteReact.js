@@ -408,8 +408,8 @@ console.log(elements.join(', '));
 //Whenever a state variable updates React Re- renders the Component.
 
 // React Hooks:
-//It is a normal js utility function.
-// useState gives  us powerful sgtate variables.
+// It is a normal js utility function.
+// useState gives  us powerful state variables.
 // React keeps our UI in sync with the data layer(local state variable).
 // As soon as the data layer updates the UI layer updates. By re-rendering the component.
 // React makes DOM operations superfast and efficient.
@@ -451,3 +451,37 @@ const [listOfRestaurants,setListOfRestaurants ] = arr;
 const arr =  useState(resList);
 const listOfRestaurants = arr[0];
 const setListOfRestaurants = arr[1];
+
+//============================================================================================
+// # Monolith architecture.
+ // API, UI(JSP pages), AUth, DB connections, Notifications  ==> All is written in single Project.
+ // Even if single change(eg, button color changed) was required to be done, needed to build, compile, deploy the whole project.
+ // In Monolith architecture frontend, backend teams  all need to work on the same the respository.
+ // Need to have same Tech stack for the whole application. If application is written in java then whole thing (UI, backend, DB, notification) need to be written in java only.
+
+
+ // # Microservice Arhitecture.
+ // Have different service for different jobs.
+ // Backend service , UI service, Ath service, DB conn service, sms email notification service  ==> All this microservices are combined together to form a big app.
+ // All this microservices talk to each other depending upon the use cases.
+ // Have separate backend project, separate UI project, separte Db connections project. For every small things we have a different project. This is known as "Separation of concern". And "Single responsibility principle".
+ // Here each as every service has its own job. No interference in others jobs.
+ // In Microservices architecture all teams work on there own independent service/project. Backend team will only maintain there backend project. They have there own deployment cycle and everything is separate.
+ // Unlike Monolith architecture, here we Can have different tech stack for different things. Can write UI in next or react, DB connections in phyton, Backend in java, sms service in Go Lang. Can write microservices in any language we want to depending upon usecase. Here one service can be in react while the other can be in vue js.
+ 
+ // Here all services run on different ports.
+ // Eg. UI service can run on port http://localhost:1234/ while 
+    Backend service can run on http://localhost:1000/
+    SMS service can run on http://localhost:3000/ 
+    On different ports we can deploy different services.
+ // Then all this ports can be mapped to different domain name. 
+ // Eg, backend can mapped to /api like.  https//:www.namastereact.com/api .And all the backend apis are deploy on the same url.
+ // Similarly can deploy sms service on https//:www.namastereact.com/sms. To send the sms we just need to call the service /sms
+ // Similarly can deploy UI on just / eg:  https//:www.namastereact.com/  => i.e as soon as you hit main domain https//:www.namastereact.com you will be redirected to http://localhost:1234/
+ // Here if UI wants to connect to backend. It connect by just calling /api. or will call respn port  :1000/
+ // Similarly backend can connect to sms services by just calling  /sms or port :3000/
+ // Like this, this all services are connected and interact with each other.
+//============================================================================================
+
+
+
