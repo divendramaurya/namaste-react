@@ -402,6 +402,7 @@ console.log(elements.join(', '));
 // When one have to export multiple things then use named export;
   export const Component;
   import { Component } from 'path';
+import { useEffect } from 'react';
 
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
@@ -471,9 +472,9 @@ const setListOfRestaurants = arr[1];
  
  // Here all services run on different ports.
  // Eg. UI service can run on port http://localhost:1234/ while 
-    Backend service can run on http://localhost:1000/
-    SMS service can run on http://localhost:3000/ 
-    On different ports we can deploy different services.
+  //  Backend service can run on http://localhost:1000/
+  //  SMS service can run on http://localhost:3000/ 
+  //  On different ports we can deploy different services.
  // Then all this ports can be mapped to different domain name. 
  // Eg, backend can mapped to /api like.  https//:www.namastereact.com/api .And all the backend apis are deploy on the same url.
  // Similarly can deploy sms service on https//:www.namastereact.com/sms. To send the sms we just need to call the service /sms
@@ -481,7 +482,54 @@ const setListOfRestaurants = arr[1];
  // Here if UI wants to connect to backend. It connect by just calling /api. or will call respn port  :1000/
  // Similarly backend can connect to sms services by just calling  /sms or port :3000/
  // Like this, this all services are connected and interact with each other.
-//============================================================================================
+ //============================================================================================
+
+// We can make a call to api in 2 ways from our UI.
+ // #1 :: As soon as the page loads ==> call the api (500ms) ==> once the data from api comes ==>  Render the UI page with the filled data.
+
+ // #2 :: As soon as the page loads ==> Render the page with back bone minimum/ skeletion we have  ==> then make the api call ==> once data comes from the api ==> re-render the page again..
+
+ //The second approach is better one because it provides a better UX. In React we use second approach, even though we are making an extra render in UI. The re renders in react in faster. Hence provide better user experience. 
 
 
+  //============================================================================================
+  //============================================================================================
+   // # useEffect is a normal js function.
+   // It takes 2 arguments 1st a callback function(arrow function) and 2nd is dependency array.
+   // The callback function in the useEffect will be called after your component renders.
+   
 
+   // fetch()  function is given to us by the browser's js engine. fetch will fetch data from the API.
+
+   // When we call swiggy api from localhost, we get cors error from browser(here chrome is blocking us from calling swiggy api form localhost) i.e one origin to another origin. If there is a origin mismatch the browsers blocks that api call. This is CORS policy.
+
+   //Shimmer UI: A Better Way to Show Loading States
+//If you have ever used a web or mobile app that takes some time to load data from a server, you might have seen a loading spinner or a progress bar that indicates that something is happening. While these are common ways to show loading states, they are not very engaging or informative for the user. They don’t tell the user what kind of content is being loaded, how long it will take, or what to expect next.
+
+//A better way to show loading states is to use a shimmer UI. A shimmer UI is a version of the UI that doesn’t contain actual content, but instead mimics the layout and shapes of the content that will eventually appear. It uses a gradient animation that creates a shimmering effect over the placeholders, giving the user a sense of motion and progress.
+
+// #### React Hooks - using useState vs just variables
+//The reason is if you useState it re-renders the view. Variables by themselves only change bits in memory and the state of your app can get out of sync with the view.
+//Agar hum normal js variable ki value change karenge tho wo change ho jayega, lekin ui mai update nhi hoga, kyuki ui re-render hi nhi hoga. because react doesn’t keep track of local js variables.
+// let btnName = "login";   
+// onClick = {() => {
+//   btnName = "logout";
+//   console.log(btnName);
+// }};
+//Agar hum useState ke state variable se banaye tho variable to update hoga hi saath mai ui bhi update hoga, because corresponding ui component rerender ho jayegi. React triggers the Reconciliation cycle.
+
+//React requires state variables as it does not keep track of local variables, so when you attempt to modify them, React does not re-render the DOM. In React, state is a JavaScript object that stores data that can be modified over time.
+
+//Eg: Agar ek header component ke andar sirf ek button ki value change hogi. tho khali wo button nhi update hoga, balki pura header component re-render(Header function call) ho jayega.(Lekin change sirf button ki jagah hi dikega UI mai)
+//Then it will find the diff between the older version and newer version of the header component Object tree in virtual dom. It will see in that diff only the button is getting updated. SO only this button changes will be pushed to real dom. This is Reconciliation process.
+
+
+    const [btnName, setBtnName] = useState("login");
+    setBtnName("logout");
+
+    //Jab hum aisa kar rhe hai, tho const btnName ki value update nhi ho rha, balki ek new instance of btnName(new btnName variable create kar rhe hai) har ek re-render pe create kiya jata hai.
+    //btnName is a new variable than it was before.
+
+// Whenever the state variable updates, React triggers Reconciliation cycle(re-renders the component);
+
+// React fiber is new Reconciliation process to efficiently manipulate the DOM.
