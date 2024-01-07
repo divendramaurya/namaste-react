@@ -359,7 +359,7 @@ const RestaurantCard = () => {
 //Padding is used to create space within an element, while margin is used to create space between elements.
 
 // Passing a props to a component in React is like passing an argument to js function.
-// When we have to dynamically pass some data to a compoenent we pass it as a props. All the properties we need to provide is wrapped in a object and passed as props to the component. Props is a object.
+// When we have to dynamically pass some data to a component we pass it as a props. All the properties we need to provide is wrapped in a object and passed as props to the component. Props is a object.
 
 
 //System Design Question// Config Driven UI -> swiggy , zomata have  --> 
@@ -533,3 +533,124 @@ const setListOfRestaurants = arr[1];
 // Whenever the state variable updates, React triggers Reconciliation cycle(re-renders the component);
 
 // React fiber is new Reconciliation process to efficiently manipulate the DOM.
+
+
+ //============================================================================================
+ // Free CORS Proxy Servers
+// 1. CorsProxy.io
+// CorsProxy.io offers a free and convenient proxy to solve CORS errors. All you need to do to use the service is to insert the proxy URL https://corsproxy.io/ as a prefix before the destination URL, and it will call the URL on behalf of your application using the proper CORS headers. Here is some JavaScript code to implement it.
+// Cors proxy is handling cors issue.
+// const url = 'https://corsproxy.io/?' + encodeURIComponent('https://api.domain.com/...');
+
+ //============================================================================================
+ useEffect(() => {}, []);
+ //callback function is mandatory while list of dependencies arrays is not mandatory.
+ //If we dont put dependency array, useEffect will be called everytime my component renders.
+
+ // If no dependency array ==> useEffect will be called after every render. 
+ // If empty dependency array ==> useEffect will be called only on initial render(just once).
+ // If we provide dependency array eg. [btnName] ==> useEffect will be called everytime only when btnName updates.
+
+//================================================================================================
+    const [btnName, setBtnName] = useState("login");
+
+// Never create useState variable outside of the component.
+// UseState is used to create local state variables inside the functional components.
+// Always create state variables on the start/ top of components(prevents inconsistency in code).
+// Never create useState hooks in ..if ...else condition / for loop/ ternary conditions... this can cause inconsistency in program.
+
+//================================================================================================
+//https://reactrouter.com/en/main    // Different routers
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
+// createBrowserRouteris used to create routing config:
+const appRouter = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout/>
+    },
+    {
+        path: '/about',
+        element: <About/>
+    }
+]);
+
+
+// RouterProvider is used to provide routing config to our app.
+root.render(<RouterProvider router={appRouter}/>)
+
+
+//import { useRouteError } from "react-router-dom";
+//const err = useRouteError();
+    console.log(err);
+// Ye hume jo bhi error aaya hai uske bare mai detailed error deta hai.
+//<h2>{err.status} | {err.statusText} | {err.data} | {window.location.href}</h2> 
+
+
+//<Outlet>
+//Whenever there is a change in the path, Outlet will be filled with the children according to the path.
+
+
+// <Link/>
+// <Link/> component is similar to <a> </a> tag, the difference is with anchor tag the whole page gets refreshed, but with link. the whole page won't refresh/reload, the Component is updated.
+//Anchor tag reloads the whole page, but Link doesn't "Reload the whole page", It just "Refreshes the component".
+// Thats why react is a single page application.
+//import { Link } from "react-router-dom";
+
+{/* <li>
+   <a href='/about'>About Us</a>
+</li>
+                    
+<li>
+   <Link to='contact'>Contact Us.</Link>
+</li> */}
+
+// When navigating to a different route always use <Link/> component. It will not reload the page.
+// Link is a wrapper over anchor tag. If you inspect Link tag in html source you will see anchor tag only.
+//================================================================================================
+// There are 2 types of Routing:
+// 1. Client side Routing:
+
+// 2. Server side Routing.
+
+//Server-Side Routing vs. Client-Side Routing
+//Server-side routing is the traditional approach to handling routes in web applications. The process involves requesting a new page from the server and providing it to the user every time a link is clicked. One major issue with server-side routing is that every request results in a full page refresh, which is not performance efficient in most cases.(page eg. About us comes form the server).
+
+//Unlike server-side routing, client-side routing involves JavaScript handling the routing process internally. In client-side routing, a request to the server is prevented when a user clicks a link, hence no page refresh even when the URL changes.(In Client side Routing all the components/pages are already loaded in the application, when our page gets loaded the 1st time.) // React used CS Routing, hence SPA and fast.
+
+//Routing
+// createBrowserRouter
+// RouterProvider
+// Link
+// ErrorPage
+// errorElement
+// useRouteError hook
+// Children routes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//================================================================================================
+//  rafce shortcut creates react functional components in vs code.
+
+

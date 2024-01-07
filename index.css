@@ -37,6 +37,7 @@
     border-radius: 4%;
     padding: 4px;
     cursor: pointer;
+    height: fit-content;
 }
 
 .res-card:hover {
