@@ -627,24 +627,58 @@ root.render(<RouterProvider router={appRouter}/>)
 // useRouteError hook
 // Children routes
 
+//================================================================================================
+// Functional component is a function which returns jsx.
+// Class based component is a class which extends React.Component that has render method which returns a piece of jsx.
+
+//================================================================================================
+//super(props);
+//Super() in React component //Why super is used in React?
+//Super() function is to call the constructor of the parent class. It is used when we need to access a few variables in the parent class. It returns an object which represents the parent class.
+
+//Why would you use super constructors with props arguments?
+//The purpose of using the super constructor with a props argument is to allow a component to inherit the properties of its parent component and also pass in additional properties as arguments to the component.
+
+//================================================================================================
+//functions are invoked/called.
+//Instance of class is created.
+
+// All the props we pass to a component, will be combined into a single object, and will be passed as a props.
+//<User name={"Dev functional"} location={"Thane Class"}/>
 
 
+// In constructor we receive props and create state variables.
+
+// When the class is instantiated first the constructor is called and then the render method is called.
 
 
+// Calling Order in class component
+
+// Parent Const
+// Parent render
+// Child Const 1
+// Child render 1
+// Child Const 2
+// Child render 2
+// Child CompDdidMount 1
+// Child CompDdidMount 2
+// Parent CompDdidMount
 
 
+//React Life cycle method
+//  https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/ 
 
+// React batches render phases of all child together an then will run commit phase of all child together.
 
-
-
-
-
-
-
-
-
-
-
+// In Mounting 2 phases:
+/**
+ * 1. Render Phase
+ *    a - Constructor
+ *    b - render()
+ * 2. commit Phase
+ *    a - react updates dom and refs
+ *    b - componentDidMount
+ * /
 
 
 
@@ -652,5 +686,19 @@ root.render(<RouterProvider router={appRouter}/>)
 
 //================================================================================================
 //  rafce shortcut creates react functional components in vs code.
+
+//================================================================================================
+// Never update state variables directly 
+this.useState.count = this.useState.count + 1;
+// this is wrong.
+<button onClick= {() => {
+                    this.setState({
+                        count : this.state.count + 1,
+                    })
+                }}>click class</button>
+//above one is right
+// state variable is a big object.
+
+//================================================================================================
 
 
