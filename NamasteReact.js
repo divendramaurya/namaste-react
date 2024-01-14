@@ -116,7 +116,7 @@ ________________________________________________________________________________
 -- <script type="module" src="./App.js"> </script>
    If we write type='module', it will consider App.js as a module and not as normal browser script.
 _____________________________________________________________________________________________________________
---# Things Parcel do: (https://parceljs.org/)
+--# Things Parcel:: do: (https://parceljs.org/)
 - Dev Build
 - Creates Local server
 - HMR - Hot module Replacement (Automatically update the browser when file is saved)
@@ -223,7 +223,8 @@ The above look with look like this in browser.
 ____________________________
 //React Element   // are written in lowercase.
 //When we write multi like jsx we need to wrap jsx inside parenthesis ()
-eg : const jsxHeading = (<h1 id='root' 
+//eg :
+ const jsxHeading = (<h1 id='root' 
                             className='root' 
                             tabIndex = '1'>
                             normal h1 jsx tag
@@ -258,7 +259,7 @@ eg:
           }   
 
 ____________________________
-in JS
+//in JS
         const func1 = () => {
           return "xyz"
         }
@@ -597,13 +598,13 @@ root.render(<RouterProvider router={appRouter}/>)
 // Thats why react is a single page application.
 //import { Link } from "react-router-dom";
 
-{/* <li>
+/* <li>
    <a href='/about'>About Us</a>
 </li>
                     
 <li>
    <Link to='contact'>Contact Us.</Link>
-</li> */}
+</li> */
 
 // When navigating to a different route always use <Link/> component. It will not reload the page.
 // Link is a wrapper over anchor tag. If you inspect Link tag in html source you will see anchor tag only.
@@ -639,6 +640,18 @@ root.render(<RouterProvider router={appRouter}/>)
 //Why would you use super constructors with props arguments?
 //The purpose of using the super constructor with a props argument is to allow a component to inherit the properties of its parent component and also pass in additional properties as arguments to the component.
 
+//When we miss passing props inside 'super(),' it won’t assign props to this context and will be 'undefined' inside the constructor. You might wonder if it doesn’t assign it to this context; how is it rendering inside the render method?
+
+// agar super() likte hai tho render ke andar hum this.pro.somevalue access kar sakte hai. lekin constructor ke under uska value undefined aayega because:
+
+//Here’s the catch, ===>>> "React assigns props on the instance right after calling the component constructor"
+
+//React under the hood
+//const instance = new DefinedComponent(props);
+//instance.props = props;
+
+//So, even if we don’t pass props to super(). React will still assign them right afterward. That’s why it works inside the render method and not in the constructor.
+
 //================================================================================================
 //functions are invoked/called.
 //Instance of class is created.
@@ -651,19 +664,24 @@ root.render(<RouterProvider router={appRouter}/>)
 
 // When the class is instantiated first the constructor is called and then the render method is called.
 
-
+//=========================//========================= 
 // Calling Order in class component
 
 // Parent Const
 // Parent render
-// Child Const 1
-// Child render 1
-// Child Const 2
-// Child render 2
-// Child CompDdidMount 1
-// Child CompDdidMount 2
-// Parent CompDdidMount
 
+//   Child Const 1
+//   Child render 1
+
+//   Child Const 2
+//   Child render 2
+
+         //< till now, DOM updated - in single batch>
+ // Child CompDidMount 1
+ // Child CompDidMount 2
+
+// Parent CompDidMount
+//=========================//=========================
 
 //React Life cycle method
 //  https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/ 
@@ -680,6 +698,23 @@ root.render(<RouterProvider router={appRouter}/>)
  *    b - componentDidMount
  * /
 
+// Render phase is very fast, Commit phase takes time.
+//===================================//=========================
+------Mounting-------
+    constructor called 
+    state is initialized with initial values
+    Render(called with dummy state values)
+       <HTML  Dummy>
+    Component Did Mount
+      <API call is made.>
+      <this.setState>   --> State variables are updated.
+
+----- UPDATE----------
+    render(API data, coming from new Props and setState())
+    <HTML    (new api data)>
+    Component Did Update.
+//===================================//=========================
+// ComponentWillUnmount will be called just before the component will be unmounted. i.e, removed from the DOM.
 
 
 
@@ -700,5 +735,69 @@ this.useState.count = this.useState.count + 1;
 // state variable is a big object.
 
 //================================================================================================
+useEffect(() => {
+//...
+}, [count1, count2])
 
+the above of  functional component is equivalent to below class component code.
 
+ComponentDidUpdate(prevProps, PrevState){
+ if( this.state.count1 !== PrevState.count1 || this.state.count2 !== PrevState.count2) {
+   //....
+ }
+}
+
+//================================
+Agar hume count1 ke change pe kuch karna hai and count2 ke change pe kuch aur karna hai. Tho hum useEffect() 2 bar likh  sakte hai. like.
+useEffect(() => {
+//...
+}, [count1])
+
+useEffect(() => {
+//...
+}, [count2])
+//================================
+
+Agar hum home route/page pe componentDidMount mai kuch
+setInterval(() => {
+            console.log('hello');
+        }, 1000)
+karte hai, aur agar hum, dusre route pe jate hai. tho bhi hamara setInterval chalte hi rahega, and that to at higher speed. isliye is setInterval jaise chizo ko hum ComponentWillUnmount mai remove/clear karte hai, jab humara page DOM se nikalta hai tab.  Nahi tho app crash ho sakta hai.
+//========================================================================
+
+// Why is useEffect funcion not async.
+//When we make useEffect function async it returns a promise and useEffect doesn't expect the callback function to return Promise, rather it expects that nothing is returned or a function is returned.
+
+As a workaround for the warning you can use a self invoking async function inside useEffect.
+
+//========================================================================
+//Single responsibility principle/ modular / testable/ maintainable / reusability
+//Single responsibility principle ==> ek function/ component sirf ek hi kaam karega.
+//Isse code modular hota hai.
+//Test cases likne mai asani hota hai. agar koi bug hua tho test case mai pakad sakte hai.
+
+//========================================================================
+//React Hooks are utility/helpers functions made to some task.
+
+//========================================================================
+// Split the website into smaller bundles according to the functionality. So that our js file doesnt get much heavy.
+// chunking
+// code splitting
+// Dynamic bundling
+// Lazy Loading::         // isse light weight //optimzed // very performant ho jata hai.
+// On Demand Loading
+// Dynamic import    
+
+// To reduce the bundle size be do code splitting. // Bundle size hum index.js ka network tab mai dekh sakte hai.
+// All the code does not come at once, it will only come when it is requested.
+// when used lazy loading, when clicked on grocery, the grocery file is not yes loaded, but react tries to render if, it leads to error. In order to handle this state, Suspense component is used.
+
+const Grocery =  lazy(() => import('./components/grocery'));
+
+{
+   path: '/grocery',
+   element: <Suspense fallback={<h1>Grocery page is loading...</h1>}><Grocery/></Suspense>
+}
+
+lazy is a function. Suspense is a Component.
+//=============================================================================

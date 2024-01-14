@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
+import useOnlineStatus from '../utils/useOnlineStatus';
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
@@ -11,6 +12,8 @@ const Body = () => {
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [searchText, setSearchText] = useState('');
 
+    const onlineStatus = useOnlineStatus();
+    console.log("onlineStatus", onlineStatus);
     //console.log('body rendered')
 
     useEffect(() => { 
@@ -21,13 +24,20 @@ const Body = () => {
    const fetchData = async() => {
        const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.1982404&lng=72.9490094&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING');
        let json = await data.json();
-       json = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+       console.log("json before", json);
+       json = json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
        console.log("json", json);
        setListOfRestaurants(json);
        setFilteredRestaurants(json);
    }
 
-    return (listOfRestaurants.length === 0) ? (<Shimmer/>) : (
+   if(onlineStatus === false){
+       return(
+        <h2>You are offline.</h2>
+       )
+   }
+
+    return (listOfRestaurants?.length === 0) ? (<Shimmer/>) : (
         <div className="body">
             <div className="filter">
                 <div className='search'>
