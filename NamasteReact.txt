@@ -801,3 +801,58 @@ const Grocery =  lazy(() => import('./components/grocery'));
 
 lazy is a function. Suspense is a Component.
 //=============================================================================
+
+// Normal CSS
+
+// SASS  
+// SCSS
+// Styled Components
+*/
+CSS Library //material UI : is a React component Library, gives component out of the box
+// Gives pre styled component // already beautiful component.// gives pre build component.
+// BootStrap
+// Chakra UI
+// Ant Design
+
+
+//=============================================================================
+// Tailwind css : 
+//https://tailwindcss.com/docs/guides/parcel
+//npm install -D tailwindcss postcss
+//npx tailwindcss init   ===> is command se hum tailwind ko apne project/repo mai initialize karte hai  // ==> It create  tailwind.css.js file  ==> ye tailwind css ka configuration file hai
+
+
+//Postcss is used a tool for transforming CSS with JavaScript
+//TailWind css uses postcss behind the scenes.
+
+// .postcssrc is a configuration file for postcss
+
+
+/** 
+{
+  "plugins": {
+    "tailwindcss": {}
+  }
+}
+ Is line se postcss ko pata chalta hai ki hum tailwindcss use kar rha hai.
+
+ Parcel our bundler will use .postcssrc file  to understand tailwind.
+
+
+ content: [
+    "./src/**/*.{html,js,ts,jsx,tsx}",
+  ],
+ isse hum tailwind ko batate hai kin files ke andar hum tailwindcss use kar sakte hai.
+ the above line means  => anywhere inside the src folder, html, js ... etc file ke andar hum tailwind likh rhe hai.
+ Now our project can track automatically where our tailwind classes are there. 
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+isse hum tailwind apne css file mai import karte hai.
+
+
+
+*/
+
