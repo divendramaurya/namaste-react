@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from './components/Header';
@@ -8,6 +8,9 @@ import Contact from './components/Contact';
 import Error from './components/Error';
 import RestaurantMenu from './components/RestaurantMenu';
 //import Grocery from './components/grocery';
+import UserContext from './utils/UserContext';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
 
 const Grocery =  lazy(() => import('./components/grocery'));
 const About = lazy(() => import('./components/About'))
@@ -18,14 +21,27 @@ const styleCard = {
 }
 
 const AppLayout = () => {
+    const [userName, setUserName] = useState();
+
+   useEffect(() => {
+    const data = {
+        name :"Divendra Maurya"
+    };
+    setUserName(data.name);
+   }, [])
+   
     console.log(<Body/>);
     return(
-        <div className="app">
+        <Provider store={appStore}>
+        <UserContext.Provider value = {{loggedInUser : userName, setUserName}}>
+         <div className="app">
             <Header/>
             <Outlet/>
-        </div>
+         </div>
+        </UserContext.Provider>
+        </Provider>
     )
-}
+} 
 
 const appRouter = createBrowserRouter([
     {

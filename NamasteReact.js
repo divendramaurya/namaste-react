@@ -808,7 +808,7 @@ lazy is a function. Suspense is a Component.
 // SCSS
 // Styled Components
 */
-CSS Library //material UI : is a React component Library, gives component out of the box
+//CSS Library //material UI : is a React component Library, gives component out of the box
 // Gives pre styled component // already beautiful component.// gives pre build component.
 // BootStrap
 // Chakra UI
@@ -840,19 +840,178 @@ CSS Library //material UI : is a React component Library, gives component out of
 
 
  content: [
-    "./src/**/*.{html,js,ts,jsx,tsx}",
+    "./src//*.{html,js,ts,jsx,tsx}",
   ],
  isse hum tailwind ko batate hai kin files ke andar hum tailwindcss use kar sakte hai.
  the above line means  => anywhere inside the src folder, html, js ... etc file ke andar hum tailwind likh rhe hai.
  Now our project can track automatically where our tailwind classes are there. 
 
+ 
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 isse hum tailwind apne css file mai import karte hai.
 
+Tailwind css gives us classname for ever css we need to write for application.
 
 
+Advantage => 
+Offers faster development.
+Very light weight => parcel sirf wo hi css classes tailwind mai se apne project bundle mai dalega jo hum use kar rhe hai. Keeps bundle size small.
+TailWind redundant css ko nikal deta hai.
+Only css we use will be shipped.
+Gives css on the fly,dont have to move back and forth between css and js file.
+
+Disadvantage =>
+Initial learning curve => 1st disadvantage in tailwind
+2nd => When we need to apply a lot of css, then our js file will become ugly/ less readable.
+<div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+      <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
+        <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg" alt="Two each of gray, white, and black shirts laying flat." class="h-full w-full object-cover object-center">
+      </div>
+</div>
+
+
+<div className="bg-pink-100 sm:bg-yellow-100 lg:bg-green-100">
+Above code: by default bg color pink rakho, but if the size increases than sm => tho yellow kardo. If size increases than lg tho green kardo. 
+
+================================================================================================================
+Higher Order Component ==> 
+Is a function that takes a component inside, enhances the component/ adds extra features to it and return a new component.
+
+Higher Order Component are pure function, they do not change the behaviour of the component,they just add some additional properties/enhances to it.
+
+HOC 
+Input - RestaurantCard  => Output - RestaurantCardPromoted
+
+=================================================================================================================
+All React applications have 2 layers
+1. UI layer (JSX,  It is powered by data layer)
+2. Data layer (consists of state, props, local variables, data)
+
+group?.card  is same as group?.["card"]
+
+// Accordian
+
+// HOC
+
+// Controlled and UnControlled component.
+
+// Lifting state up
+//Many times, multiple components must reflect the same changing data. And if the data is not in sync between the "parent and children components" or "cousin components", it is recommended to lift the shared state up to the closest common ancestor.
+We lift the state up to make the parent state a single shared state and a sole "source of truth" and pass the parent's data to its children. 
+This concept is called lifting state up. It is of great use to maintain "data consistency" in our react applications.
+
+// To pass data from child to parent
+*** Parent ***
+  const [showIndex, setShowIndex] = useState(null);
+
+  {categories.map((category, index) => 
+            <RestaurantCategory 
+               key = {category.card.card.title} 
+               data ={category?.card?.card}
+               showItems = {index === showIndex ? true : false}
+               setShowIndex = {() => setShowIndex(index)}
+            />)}
+
+*** Child ***
+const RestaurantCategory = ({data, showItems, setShowIndex}) => {
+
+   handleClick = () => {
+        setShowIndex();
+    }
+
+    <div className="flex justify-between" onClick={handleClick}>
+
+    { showItems && <ItemList items = {data?.itemCards}/>}
+
+// Props Drilling
+
+// React has one way data flow (parent to children)
+
+
+// Global Data can be accessed using React context => Provides central store
+// React Context  => Keeps Data in the central place, prevents props drilling.
+// Logged in user info can be required in any component anywhere inside the App.
+// Theme (Light, Dark)
 */
+//Create kiya
+import { createContext } from "react";
+const UserContext = createContext({
+    loggedInUser : "Default User",
+});
+export default UserContext;
+
+// Use kiya (functional mai) / consume liya
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
+  const {loggedInUser} = useContext(UserContext);
+  <li className='px-4 font-bold'>{loggedInUser}</li>
+
+//Use kiya (class component mai) / consume liya
+import UserContext from "../utils/UserContext";
+    <UserContext.Consumer>
+    {({loggedInUser}) => <h1>{loggedInUser}</h1>}
+    </UserContext.Consumer>
+
+
+
+
+// Only that data that is to be used at multiple places must be kept in Context. 
+// Context is a Global space i can provide to a whole application or just a small portion of application. We can create multiple context.
+// When we need to access something all across our app, We wrap our whole application with the respective context provider. So that whole application can use it.
+
+// In small and mid size applications context can work in better way, no need of other data/state management libraries (like Redux => creates store)
+// Agar Context use karte bade applications mai tho apne ko multiple contexts create karne padenge like CardContext, UserContext, UIContext, ThemeContext.
+// Redux is scalable. Redux has became a kind of standard for state management when building larger applications.
+// Redux is used mainly in large scale applications where data is heavily used, lot of read write operations are happening. Lot of data transfer.
+// Redux Offers easier debugging.
+// A Predictable State Container for JS Apps
+
+// Redux is not mandatory.
+// Redux and React are different libraries.
+// Zustand  => Another state management library like Redux.
+
+//The "Redux Toolkit" package is intended to be the standard way to write Redux logic. It was originally created to help address three common concerns about Redux:
+
+1. "Configuring a Redux store is too complicated"
+2. "I have to add a lot of packages to get Redux to do anything useful"
+3. "Redux requires too much boilerplate code" 
+
+//***Redux Store***
+// Redux store is big whole js object, Kept in a central global place.
+
+// Redux store becomes very big, therefore we create different parts of redux stores called as ***"Slices"***. // We can create cart slice, theme slice, user slice. 
+// Slices are logical Separations created inside Store on basis of different logical operations.
+
+// Hum store ke andar direct value change/add nhi kar sakte.
+
+***********Redux************
+
+***Write Data***
+When we click on `add button`  ====> It `dispatches an "Action"` ====> that action will `call a "Reducer" function` ====> that function() will then internally `"Modify/Update" the slice of our Redux Store`(here Cart).
+
+***Read Data***
+When we need to show/read data from the store in the UI. We will use a "Selector" to read the data from the store, and the selector will modify our react component.
+In Short Selector gives us the data from the store. (When we use selector, this phenomenon is known is "Subscribing to the store"). We say like header component is subscribed to our store. i.e the `header` is in sync with the store. If the data inside the store changes, my header component will update automatically.
+`The Header component is subscribed to the store using a Selector`,  `so whatever the data inside the store changes, my header component will update automatically`
+
+# Redux Toolkit
+- Install @reduxjs/toolkit and react-redux
+- Build our Store
+- Connect our Store to our app.
+- Create Slice(cartSlice)
+- dispatch(action) 
+- Selector
+
+import { configureStore } from "@reduxjs/toolkit"
+configureStore comes from "@reduxjs/toolkit", because it is core redux thing.
+
+import { Provider } from 'react-redux';
+Provider comes from 'react-redux' , because provider acts as bridge between react and redux.
+
+1 hour 2 mins
+
+
 
